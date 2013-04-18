@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# gitmoji
+# by Dominic Baggott
+# https://github.com/evilstreak/gitmoji
+
+# check we're in a git repo (or bail)
+git status >/dev/null 2>&1
+[ $? -ne 0 ] && exit 1
+
+# look through all known commits to find the most recent by us
+git_email=`git config --get user.email`
+last_commit=`git rev-list --all --author=$git_email --format=%at | grep -v commit | sort | tail -1`
+
+# work out how long ago it was and pick an emoji
+elapsed=$((`date +%s` - $last_commit))
+
+if [ $elapsed -lt 300 ]; then
+  emoji=😇
+elif [ $elapsed -lt 1800 ]; then
+  emoji=😄
+elif [ $elapsed -lt 3600 ]; then
+  emoji=😊
+elif [ $elapsed -lt 7200 ]; then
+  emoji=😔
+elif [ $elapsed -lt 21600 ]; then
+  emoji=😞
+elif [ $elapsed -lt 86400 ]; then
+  emoji=😢
+else
+  emoji=😡
+fi
+
+echo "$emoji \c"
