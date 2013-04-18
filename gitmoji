@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # gitmoji
 # by Dominic Baggott
@@ -38,4 +38,4 @@ else
   emoji=😡
 fi
 
-echo "$emoji \c"
+echo -n "$emoji "
