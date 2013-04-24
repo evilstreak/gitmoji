@@ -22,17 +22,19 @@ last_commit=`git rev-list --all --author=$git_email --fixed-strings --format=%at
 # work out how long ago it was and pick an emoji
 elapsed=$((`date +%s` - $last_commit))
 
-if [ $elapsed -lt 300 ]; then
+if [ $elapsed -lt 300 ]; then # 5 minutes
   emoji=😇
-elif [ $elapsed -lt 1800 ]; then
+elif [ $elapsed -lt 1800 ]; then # 30 minutes
   emoji=😄
-elif [ $elapsed -lt 3600 ]; then
+elif [ $elapsed -lt 3600 ]; then # 1 hour
   emoji=😊
-elif [ $elapsed -lt 7200 ]; then
+elif [ $elapsed -lt 7200 ]; then # 2 hours
+  emoji=😌
+elif [ $elapsed -lt 21600 ]; then # 6 hours
   emoji=😔
-elif [ $elapsed -lt 21600 ]; then
+elif [ $elapsed -lt 86400 ]; then # 1 day
   emoji=😞
-elif [ $elapsed -lt 86400 ]; then
+elif [ $elapsed -lt 604800 ]; then # 1 week
   emoji=😢
 else
   emoji=😡
