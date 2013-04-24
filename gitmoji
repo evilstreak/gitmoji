@@ -14,7 +14,7 @@ git rev-list --all >/dev/null 2>&1
 
 # look through all known commits to find the most recent by us
 git_email=`git config --get user.email`
-last_commit=`git rev-list --all --author=$git_email --format=%at | grep -v commit | sort | tail -1`
+last_commit=`git rev-list --all --author=$git_email --fixed-strings --format=%at | fgrep -v commit | sort | tail -1`
 
 # bail if we didn't find a commit
 [[ -z $last_commit ]] && exit 1
